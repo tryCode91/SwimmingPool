@@ -1,0 +1,19 @@
+﻿@model IEnumerable<Pool>
+
+@{
+    ViewData["Title"] = "Swim";
+}
+<section class="py-5 text-center container">
+    <div class="row py-lg-5">
+        <div class="col-lg-6 col-md-8 mx-auto">
+            <h1 class="fw-light">Select location</h1>
+            <p class="lead text-body-secondary">This is a collection of available swimming pools where you can reserve a time to do some training or just splashing around in the water with your family.</p>
+            <p>
+                @foreach(var item in Model)
+                {  
+                    <a asp-controller="Pool" asp-action="Detail" asp-route-id="@item.PoolId" class="btn btn-primary my-2">@item.Location</a>
+                }
+            </p>
+        </div>
+    </div>
+</section>

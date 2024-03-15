@@ -1,0 +1,21 @@
+﻿@using SwimmingPool_V1.ViewModels
+@model ReservationViewModel
+
+<div class="row">
+    @if (@ViewBag.LaneLimitReached == "True")
+    {
+        <div class="mb-2"><strong>Limit has been reached for this lane.</strong></div>
+        <form method="post">
+            <input type="submit" class="btn btn-outline-secondary btn-sm " name="submitButton" value="Go back" />
+        </form>
+    }
+    else
+    {
+        <div>Are you sure that you would like to reserve @Model.Type?</div>
+        <form method="post">
+            <input type="submit" class="btn btn-success" name="submitButton" value="Yes" />
+            <input type="submit" class="btn btn-danger" name="submitButton" value="No" />
+        </form>
+    }
+    
+</div>

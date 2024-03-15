@@ -1,0 +1,53 @@
+﻿@model Pool
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Available lanes in @Model.Location - @Model.PoolName</h1>
+<ul>
+    <li>Open @Model.Open - @Model.Close</li>
+</ul>
+<div class="album py-5 bg-body-tertiary">
+    <div class="container">
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+
+        @foreach(var item in Model.Lane)
+        {
+            <div class="col">
+                <div class="card shadow-sm">
+                    <img src="@item.Image" height="300px"/>
+                    <div class="card-body row">
+                        <div class="col-8">
+                            <div><strong>Type</strong> @item.Type</div>
+                            <div><strong>Lane  </strong>@item.LaneId</div>
+                            <div><strong>Current reservations</strong> @item.CurrentReserved</div>
+                            <div><strong>Limit</strong> @item.Limit</div> 
+                        </div>
+                        <div class="col-4 mt-5">
+                            <div class="d-flex justify-content-between align-items-end">
+                                <div class="btn-group">
+                                @if (User.Identity.IsAuthenticated && User.IsInRole("admin"))
+                                {
+                                    <a asp-controller="Pool" asp-action="Edit" asp-route-id="@item.LaneId" class="btn btn-sm btn-outline-secondary">Edit</a>
+                                            <button type="button" class="btn btn-sm btn-outline-secondary">Reserve</button>
+
+                                } 
+                                else if (User.Identity.IsAuthenticated && User.IsInRole("user"))                                
+                                {
+                                        
+                                    //<button class="reserve-button">Reserved</button>
+                                    <a asp-controller="Pool" asp-action="Reserve" asp-route-id="@item.LaneId" class="btn btn-sm btn-outline-success">Reserve</a>
+
+                                }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+
+        </div> 
+
+    </div>
+</div>
